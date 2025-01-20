@@ -1,0 +1,140 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3sraum3knjmi"]
+
+[ext_resource type="Script" uid="uid://b7chx022h8xu6" path="res://scenes/hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://df46mnew50kwi" path="res://assets/music_off.png" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://dm67a8yfb6046" path="res://assets/music_on.png" id="3_6fi6k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2snw"]
+bg_color = Color(0, 0.774192, 0.254905, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37p78"]
+bg_color = Color(0.969137, 0.969137, 0.969137, 0.835294)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37p78")
+
+[node name="Player1Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 576.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.196078)
+theme_override_font_sizes/font_size = 400
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="Player2Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.196078)
+theme_override_font_sizes/font_size = 400
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="ButtonNewGamePlayer" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -245.0
+offset_right = 151.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_n2snw")
+text = "New Game
+Player vs. Player"
+
+[node name="ButtonNewGameCPU" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -91.0
+offset_right = 155.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_n2snw")
+text = "New Game
+Player vs. CPU
+"
+
+[node name="LabelMessage" type="Label" parent="."]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -495.0
+offset_top = 58.0
+offset_right = 484.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.772549, 0.254902, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_37p78")
+text = "GNOP
+Player vs. Player games go until you quit the game.
+Player vs. CPU game is first to 10.
+\"W\" and \"S\" to move Player 1. Up and Down arrow for Player 2.
+\"R\" to reset the ball. \"Q\" to quit."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -118.0
+offset_right = -244.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="MusicOn" type="Sprite2D" parent="MusicButton"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_6fi6k")
+centered = false
+
+[node name="MusicOff" type="Sprite2D" parent="MusicButton"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_5ysmq")
+centered = false
+
+[connection signal="pressed" from="ButtonNewGamePlayer" to="." method="_on_button_new_game_player_pressed"]
+[connection signal="pressed" from="ButtonNewGameCPU" to="." method="_on_button_new_game_cpu_pressed"]
+[connection signal="pressed" from="MusicButton" to="." method="_on_music_button_pressed"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5am01jd7rxx7"]
+
+[ext_resource type="Script" uid="uid://c5l6y23qxwqpn" path="res://scenes/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b3l1b2qe7nbyn" path="res://scenes/walls.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c3sraum3knjmi" path="res://scenes/hud.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://0f48gfjke8eq" path="res://scenes/player_1.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cs8suavr7ga1r" path="res://scenes/player_2.tscn" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://rcaoyp7t8h0x" path="res://assets/paddle.mp3" id="6_tefeu"]
+[ext_resource type="AudioStream" uid="uid://dx38q8fmx3otn" path="res://assets/wall.mp3" id="7_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://x11iyb6ee3jm" path="res://assets/relaxing-guitar-loop-v5-245859.mp3" id="8_tipki"]
+[ext_resource type="AudioStream" uid="uid://ck77qsimly4nk" path="res://assets/pixel-death-66829.mp3" id="9_85g3d"]
+[ext_resource type="AudioStream" uid="uid://car1q8x0w2fft" path="res://assets/videogame-death-sound-43894.mp3" id="10_choun"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="BG" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Walls" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="Player1" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(40, 200)
+
+[node name="Player2" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(1072, 400)
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("2_lquwl")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 569.0
+offset_top = 280.0
+offset_right = 569.0
+offset_bottom = 280.0
+
+[node name="PaddleHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_tefeu")
+volume_db = 10.0
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_tipki")
+volume_db = -8.0
+autoplay = true
+parameters/looping = true
+
+[node name="WallHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_o6xl0")
+volume_db = 5.0
+
+[node name="Out" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_85g3d")
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_choun")
+volume_db = 10.0
+
+[connection signal="ball_hit_bottom_wall" from="Walls" to="." method="_on_walls_ball_hit_bottom_wall"]
+[connection signal="ball_hit_left_wall" from="Walls" to="." method="_on_walls_ball_hit_left_wall"]
+[connection signal="ball_hit_right_wall" from="Walls" to="." method="_on_walls_ball_hit_right_wall"]
+[connection signal="ball_hit_top_wall" from="Walls" to="." method="_on_walls_ball_hit_top_wall"]
+[connection signal="player_1_hit" from="Player1" to="." method="_on_player_1_player_1_hit"]
+[connection signal="player_2_hit" from="Player2" to="." method="_on_player_2_player_2_hit"]
+[connection signal="music_button" from="HUD" to="." method="_on_hud_music_button"]
+[connection signal="new_game_cpu" from="HUD" to="." method="_on_hud_new_game_cpu"]
+[connection signal="new_game_players" from="HUD" to="." method="_on_hud_new_game_players"]

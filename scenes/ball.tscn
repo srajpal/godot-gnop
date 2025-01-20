@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpuqgn4tjvsk5"]
+
+[ext_resource type="Script" uid="uid://ci3fg867en6hc" path="res://scenes/ball.gd" id="1_41u45"]
+[ext_resource type="Texture2D" uid="uid://s0ojspdy56x1" path="res://assets/ball2.png" id="2_41u45"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_41u45"]
+radius = 57.2189
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cxlvu"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 6.05
+emission_ring_cone_angle = 63.9
+angle_min = -124.1
+angle_max = 124.2
+spread = 45.375
+flatness = 0.15
+initial_velocity_min = 195.4
+initial_velocity_max = 344.83
+scale_max = 7.0
+hue_variation_min = -0.66
+hue_variation_max = 0.66
+
+[node name="Ball" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_41u45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_41u45")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1.99999)
+scale = Vector2(0.23524, 0.23524)
+texture = ExtResource("2_41u45")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 200
+lifetime = 0.75
+speed_scale = 1.1
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cxlvu")

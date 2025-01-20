@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://0f48gfjke8eq"]
+
+[ext_resource type="Script" uid="uid://dc417uhhq68yx" path="res://scenes/player_1.gd" id="1_squ5q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rfmnd"]
+height = 100.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gneq0"]
+height = 100.0
+
+[node name="Player1" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_squ5q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(29, 50)
+shape = SubResource("CapsuleShape2D_rfmnd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 100.0
+color = Color(0.12549, 0.745098, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(33, 51)
+shape = SubResource("CapsuleShape2D_gneq0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

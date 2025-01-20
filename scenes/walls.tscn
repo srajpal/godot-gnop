@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3l1b2qe7nbyn"]
+
+[ext_resource type="Script" uid="uid://bnupt5eopffc0" path="res://scenes/walls.gd" id="1_xxkwp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh6kn"]
+size = Vector2(1152, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yax5h"]
+size = Vector2(1131, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lpna"]
+size = Vector2(1132, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oelu8"]
+size = Vector2(10, 648)
+
+[node name="Walls" type="Node2D"]
+script = ExtResource("1_xxkwp")
+
+[node name="TopStatic" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopStatic"]
+position = Vector2(576, 5)
+shape = SubResource("RectangleShape2D_oh6kn")
+
+[node name="ColorRect" type="ColorRect" parent="TopStatic"]
+offset_right = 1152.0
+offset_bottom = 10.0
+
+[node name="Area2DTop" type="Area2D" parent="TopStatic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopStatic/Area2DTop"]
+position = Vector2(576.5, 6)
+shape = SubResource("RectangleShape2D_yax5h")
+
+[node name="BottomStatic" type="StaticBody2D" parent="."]
+position = Vector2(0, 638)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomStatic"]
+position = Vector2(576, 5)
+shape = SubResource("RectangleShape2D_oh6kn")
+
+[node name="ColorRect" type="ColorRect" parent="BottomStatic"]
+offset_right = 1152.0
+offset_bottom = 10.0
+
+[node name="Area2DBottom" type="Area2D" parent="BottomStatic"]
+position = Vector2(22, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomStatic/Area2DBottom"]
+position = Vector2(554, 10)
+shape = SubResource("RectangleShape2D_0lpna")
+
+[node name="LeftStatic" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftStatic"]
+position = Vector2(5, 324)
+shape = SubResource("RectangleShape2D_oelu8")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="LeftStatic"]
+offset_right = 10.0
+offset_bottom = 648.0
+
+[node name="RightStatic" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(1142, 0)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightStatic"]
+position = Vector2(5, 324)
+shape = SubResource("RectangleShape2D_oelu8")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="RightStatic"]
+offset_right = 10.0
+offset_bottom = 648.0
+
+[node name="LeftOutOfBounds" type="Area2D" parent="."]
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftOutOfBounds"]
+position = Vector2(5, 324)
+shape = SubResource("RectangleShape2D_oelu8")
+
+[node name="ColorRect" type="ColorRect" parent="LeftOutOfBounds"]
+offset_right = 10.0
+offset_bottom = 648.0
+
+[node name="RightOutOfBounds" type="Area2D" parent="."]
+position = Vector2(1142, 0)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightOutOfBounds"]
+position = Vector2(5, 324)
+shape = SubResource("RectangleShape2D_oelu8")
+
+[node name="ColorRect" type="ColorRect" parent="RightOutOfBounds"]
+offset_right = 10.0
+offset_bottom = 648.0
+
+[node name="CenterLine" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="TopStatic/Area2DTop" to="." method="_on_area_2d_top_body_entered"]
+[connection signal="body_entered" from="BottomStatic/Area2DBottom" to="." method="_on_area_2d_bottom_body_entered"]
+[connection signal="body_entered" from="LeftOutOfBounds" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="RightOutOfBounds" to="." method="_on_right_body_entered"]
